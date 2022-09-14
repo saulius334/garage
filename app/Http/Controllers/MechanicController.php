@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mechanic;
-use App\Http\Requests\StoreMechanicRequest;
-use App\Http\Requests\UpdateMechanicRequest;
+use Illuminate\Http\Request;
 
 class MechanicController extends Controller
 {
@@ -25,7 +24,7 @@ class MechanicController extends Controller
      */
     public function create()
     {
-        //
+        return view('mechanic.create');
     }
 
     /**
@@ -34,7 +33,7 @@ class MechanicController extends Controller
      * @param  \App\Http\Requests\StoreMechanicRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMechanicRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -68,7 +67,7 @@ class MechanicController extends Controller
      * @param  \App\Models\Mechanic  $mechanic
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMechanicRequest $request, Mechanic $mechanic)
+    public function update(Request $request, Mechanic $mechanic)
     {
         //
     }
