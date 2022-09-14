@@ -6,7 +6,7 @@
         <div class="col-5">
             <div class="card">
                 <div class="card-header">
-                    <h2>Mechanic</h2>
+                    <h2>Truck</h2>
                 </div>
                 <div class="card-body">
                     <h5>{{$mechanic->name}}</h5>
