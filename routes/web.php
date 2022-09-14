@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(); // uzkomentuot arba viduj parasyt ['register' => false] ir disabled registration bus
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

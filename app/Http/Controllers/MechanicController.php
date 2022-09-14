@@ -35,7 +35,11 @@ class MechanicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mechanic = new Mechanic;
+        $mechanic->name = $request->name;
+        $mechanic->surname = $request->surname;
+        $mechanic->save();
+        return redirect()->route('m_index');
     }
 
     /**
