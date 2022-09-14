@@ -5,17 +5,17 @@
         <div class="col-5">
             <div class="card">
                 <div class="card-header">
-                    <h2>Edit Post</h2>
+                    <h2>Change mechanic</h2>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('edit', $blog)}}" method="post">
+                    <form action="{{route('m_edit', $mechanic)}}" method="post">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Title</span>
-                        <input type="text" value={{old('title', $blog->title)}} name="title" class="form-control">
+                        <span class="input-group-text">Name</span>
+                        <input type="text" value={{old('name', $mechanic->name)}} name="name" class="form-control">
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-text">Post</span>
-                        <textarea class="form-control" name="post">{{old('post',$blog->post)}}</textarea>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Surname</span>
+                        <input type="text" value={{old('surname', $mechanic->surname)}} name="surname" class="form-control">
                     </div>
                     @csrf
                     @method('put')

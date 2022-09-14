@@ -12,7 +12,7 @@
                     <ul class="list-group">
                         @forelse($mechanics as $mechanic)
                         <li class="list-group-item">
-                            <div class="posts-list">
+                            <div class="mechanic-list">
                                 <div class="content">
                                     <h2>{{$mechanic->name}}</h2>
                                     <h2>{{$mechanic->surname}}</h2>

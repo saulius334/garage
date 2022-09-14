@@ -14,7 +14,10 @@ class MechanicController extends Controller
      */
     public function index()
     {
-        //
+       $mechanics = Mechanic::all();
+       return view('mechanic.index', [
+        'mechanics' => $mechanics
+       ]);
     }
 
     /**
@@ -50,7 +53,9 @@ class MechanicController extends Controller
      */
     public function show(Mechanic $mechanic)
     {
-        //
+        return view('mechanic.show', [
+            'mechanic' => $mechanic
+        ]);
     }
 
     /**
@@ -61,7 +66,7 @@ class MechanicController extends Controller
      */
     public function edit(Mechanic $mechanic)
     {
-        //
+        
     }
 
     /**

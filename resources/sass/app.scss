@@ -6,3 +6,31 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+.mechanic-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .content {
+        h2 {
+            display: flex;
+            color: crimson;
+            margin: 0;
+        }
+    }
+    .buttons {
+        display: flex;
+        align-items: center;
+        button, a, form {
+            margin: 5px 10px;
+            height: 38px;
+            display: block;
+        }
+        form {
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+    }
+}
