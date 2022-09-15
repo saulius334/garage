@@ -9,8 +9,12 @@
                     <h2>Truck</h2>
                 </div>
                 <div class="card-body">
-                    <h5>{{$mechanic->name}}</h5>
-                    <h5>{{$mechanic->surname}}</h5>
+                    <div class="truck-show">
+                    <div class="line"><small>Plate:</small><h5>{{$truck->plate}}</h5></div>
+                    <div class="line"><small>Truck:</small><h5>{{$truck->maker}} {{$truck->make_year}}</h5></div>
+                    <div class="line"><small>Mechanic:</small><h5>{{$truck->getMechanic->name}} {{$truck->getMechanic->surname}}</h5></div>
+                    <p>{{$truck->mechanic_notices}}</p>
+                    </div>
                 </div>
             </div>
         </div>
