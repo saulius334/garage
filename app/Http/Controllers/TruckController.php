@@ -15,7 +15,11 @@ class TruckController extends Controller
      */
     public function index()
     {
-        //
+        $trucks = Truck::all();
+
+        return view('truck.index', [
+            'trucks' => $trucks
+        ]);
     }
 
     /**
