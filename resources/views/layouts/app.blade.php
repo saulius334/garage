@@ -90,6 +90,34 @@
             </div>
         </nav>
         <main class="py-4">
+
+            @if(Session::has('success_msg'))
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-5">
+                        <div class="alert alert-success">{{ Session::get('success_msg')  }}</div>
+                    </div>
+                </div>
+            </div>
+            @endif
+            @if(Session::has('danger_msg'))
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-5">
+                        <div class="alert alert-danger">{{ Session::get('danger_msg')  }}</div>
+                    </div>
+                </div>
+            </div>
+            @endif
+            @if(Session::has('info_msg'))
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-5">
+                        <div class="alert alert-info">{{ Session::get('info_msg')  }}</div>
+                    </div>
+                </div>
+            </div>
+            @endif
             @yield('content')
         </main>
     </div>

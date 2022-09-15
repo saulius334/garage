@@ -16,6 +16,7 @@
                                 <div class="content">
                                     <h2>{{$mechanic->name}}</h2>
                                     <h2>{{$mechanic->surname}}</h2>
+                                    <span>[{{$mechanic->getTrucks()->count()}}]</span>
                                 </div>
                                 <div class="buttons">
                                     <a href="{{route('m_show', $mechanic)}}" class="btn btn-info">Show</a>
@@ -24,6 +25,7 @@
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
                                 </div>
                             </div>
                         </li>

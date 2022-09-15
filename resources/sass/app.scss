@@ -108,3 +108,14 @@
         }
     }
 }
+.mechanic {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    h5 {
+        margin: 10px;
+        font-size: 50px;
+        color: darkgoldenrod;
+    }
+}
