@@ -16,6 +16,10 @@
                                 <div class="content">
                                     <h1><span>plate:</span>{{$truck->plate}}</h1>
                                     <h4><span>maker:</span>{{$truck->maker}}</h4>
+                                    <h5><span>mechanic:</span>
+                                        <a href="{{route('m_show', $truck->getMechanic->id)}}">
+                                        {{$truck->getMechanic->name}} {{$truck->getMechanic->surname}}
+                                    </a></h5>
                                 </div>
                                 <div class="buttons">
                                     <a href="{{route('t_show', $truck)}}" class="btn btn-info">Show</a>

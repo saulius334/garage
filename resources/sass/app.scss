@@ -70,6 +70,28 @@
                 margin-right: 10px;
             }
         }
+        h5 {
+            display: flex;
+            color: olive;
+            margin: 0;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            margin: 0 0 0 15px;
+            span {
+                font-size: 12px;
+                color: gray;
+                margin-right: 10px;
+            }
+            a {
+                text-decoration: none;
+                color: olive;
+                transition: all 0.3s;
+                &:hover {
+                    color:olivedrab;
+                }
+            }
+        }
     }
     .buttons {
         display: flex;
