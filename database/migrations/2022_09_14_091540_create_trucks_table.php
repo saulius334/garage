@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('maker',255);
             $table->string('plate',20);
-            $table->unsignedTinyInteger('make_year');
-            $table->text('mechanic_notices');
+            $table->unsignedInteger('make_year');
+            $table->text('mechanic_notices')->nullable();
             $table->unsignedBigInteger('mechanic_id');
             $table->foreign('mechanic_id')->references('id')->on('mechanics');
             $table->timestamps();

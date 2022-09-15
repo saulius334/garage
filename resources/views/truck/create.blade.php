@@ -8,15 +8,30 @@
                     <h2>New Truck</h2>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('m_store')}}" method="post">
+                    <form action="{{route('t_store')}}" method="post">
                     <div class="input-group mb-3">
-                        <span class="input-group-text">Name</span>
-                        <input value="{{old('name')}}" type="text" name="name" class="form-control">
+                        <span class="input-group-text">Maker</span>
+                        <input value="{{old('maker')}}" type="text" name="maker" class="form-control">
                     </div>
-                    <div class="input-group">
-                        <span class="input-group-text">Surname</span>
-                        <input value="{{old('surname')}}" type="text" name="surname" class="form-control">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Plate</span>
+                        <input value="{{old('plate')}}" type="text" name="plate" class="form-control">
                     </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Make year</span>
+                        <input value="{{old('make_year')}}" type="text" name="make_year" class="form-control">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Notices</span>
+                        <textarea name="mechanic_notices" class="form-control">{{old('mechanic_notices')}}</textarea>
+                    </div>
+                    <select name="mechanic_id" class="form-select mt-3">
+                        <option value="0">Choose mechanic</option>
+                        @foreach ($mechanics as $value)
+                        <option value="{{$value->id}}">{{$value->name}} {{$value->surname}}</option>
+                        @endforeach
+
+                      </select>
                     @csrf
                     <button type="submit" class="btn btn-secondary mt-4">Create</button>
                     </form>
