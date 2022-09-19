@@ -13,6 +13,11 @@
                     <div class="line"><small>Plate:</small><h5>{{$truck->plate}}</h5></div>
                     <div class="line"><small>Truck:</small><h5>{{$truck->maker}} {{$truck->make_year}}</h5></div>
                     <div class="line"><small>Mechanic:</small><h5>{{$truck->getMechanic->name}} {{$truck->getMechanic->surname}}</h5></div>
+                    @if($truck->photo)
+                    <div class="img">
+                        <img src="{{$truck->photo}}" alt="photo">
+                    </div>
+                    @endif
                     <p>{{$truck->mechanic_notices}}</p>
                     </div>
                 </div>

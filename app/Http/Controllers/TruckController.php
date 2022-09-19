@@ -48,28 +48,18 @@ class TruckController extends Controller
         $truck = new Truck;
 
 
-        if ($request->file('animal_photo')) {
-        
-         $photo = $request->file('animal_photo');
-        
+        if ($request->file('photo')) {
+         $photo = $request->file('photo');
          $ext = $photo->getClientOriginalExtension();
-        
          $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-        
          $file = $name. '-' . rand(100000, 999999). '.' . $ext;
-        
         //  $Image = Image::make($photo)->pixelate(12);
-        
         //  $Image->save(public_path().'/images/'.$file);
-        
-         $photo->move(public_path().'/images', $file);
-        
-         $truck->photo = asset('/images') . '/' . $file;
-        
+         $photo->move(public_path().'/trucks', $file);
+         $truck->photo = asset('/trucks') . '/' . $file;
         }
         
         
-        dd($request->file('photo'));
         $truck ->maker = $request->maker;
         $truck ->plate = $request->plate;
         $truck ->make_year = $request->make_year;
@@ -133,6 +123,10 @@ class TruckController extends Controller
      */
     public function destroy(Truck $truck)
     {
+        if ($truck->photo) {
+            unlink(public_path() . '/trucks/' . pathinfo($truck->photo, PATHINFO_FILENAME) . '.' . pathinfo($truck->photo, PATHINFO_EXTENSION));
+
+        }
         $truck->delete();
         return redirect()->route('t_index');
     }
