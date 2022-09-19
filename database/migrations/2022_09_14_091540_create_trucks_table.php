@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('plate',20);
             $table->unsignedInteger('make_year');
             $table->text('mechanic_notices')->nullable();
+            $table->string('photo', 255)->nullable();
             $table->unsignedBigInteger('mechanic_id');
             $table->foreign('mechanic_id')->references('id')->on('mechanics');
             $table->timestamps();
