@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Truck;
 use App\Models\Mechanic;
 use Illuminate\Http\Request;
-use Image;
+use Illuminate\Routing\Controller;
+use Intervention\Image\Facades\Image;
 
 class TruckController extends Controller
 {
@@ -31,6 +32,12 @@ class TruckController extends Controller
     public function create()
     {
         $mechanics = Mechanic::all();
+        // $mechanics = $mechanics->sortBy('name'); // rusiavimas lol easy
+        $mechanics = Mechanic::orderBy('name') // database rusiavimas where('id', 6)
+        ->orderBy('surname', 'desc')
+        ->get();
+
+
         return view('truck.create', [
             'mechanics' => $mechanics
         ]);
