@@ -7,28 +7,24 @@
             <div class="card">
                 <div class="card-header">
                     <h2>Trucks</h2>
-                    <form action="{{route('m_index')}}" method="get">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <select name="mech" class="form-select mt-1">
-                                                    @foreach ($mechanics as $mechanic)
-                                                    <option value="{{$mechanic->id}}">
-                                                        {{$mechanic->name}} {{$mechanic->surname}}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-6">
-                                                {{-- <button type="submit" class="btn btn-primary m-1">Sort</button> --}}
-
+                        <form action="{{route('m_index')}}" method="get">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <select name="mech" class="form-select mt-1">
+                                                        @foreach ($mechanics as $mechanic)
+                                                        <option value="{{$mechanic->id}}">
+                                                            {{$mechanic->name}} {{$mechanic->surname}}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 <div class="col-7">
                                     <div class="container">
                                         <div class="row">
