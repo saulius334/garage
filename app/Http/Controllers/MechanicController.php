@@ -16,11 +16,12 @@ class MechanicController extends Controller
     {
 
         $perPage = match($request->per_page) {
+            'all' => 1000000,
             '5' => 5,
             '10' => 10,
             '20' => 20,
             '50' => 50,
-            default => 5
+            default => 10000
         };
         $mechanics = match ($request->sort) {
             'name_asc' => Mechanic::orderBy('name', 'asc')->paginate($perPage)->withQueryString(),
