@@ -18,9 +18,11 @@ class TruckController extends Controller
     public function index()
     {
         $trucks = Truck::all();
+        $mechanics = Mechanic::orderBy('surname')->get();
 
         return view('truck.index', [
-            'trucks' => $trucks
+            'trucks' => $trucks,
+            'mechanics' => $mechanics
         ]);
     }
 
