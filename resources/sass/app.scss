@@ -1,36 +1,37 @@
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
-
-.mechanic-list {
+.mechanics-list {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     .content {
+        display: flex;
         h2 {
-            display: flex;
             color: crimson;
-            margin: 0;
+            margin: 0 5px;
         }
     }
     .buttons {
         display: flex;
         align-items: center;
-        button, a, form {
+        button,
+        form,
+        a {
             margin: 5px 10px;
-            height: 38px;
             display: block;
         }
         form {
             display: flex;
             align-items: center;
             margin: 0;
+        }
+        button {
+            transform: rotate(1deg);
         }
     }
 }
@@ -43,23 +44,22 @@
     .content {
         display: flex;
         align-items: center;
-        h1 {
-            display: flex;
+        h2 {
             color: skyblue;
-            margin: 0;
+            margin: 0 5px;
             font-size: 22px;
             display: flex;
             align-items: center;
             span {
                 font-size: 12px;
                 color: gray;
+                font-style: italic;
                 margin-right: 10px;
             }
         }
         h4 {
-            display: flex;
             color: orangered;
-            margin: 0;
+            margin: 0 5px;
             font-size: 22px;
             display: flex;
             align-items: center;
@@ -67,13 +67,13 @@
             span {
                 font-size: 12px;
                 color: gray;
+                font-style: italic;
                 margin-right: 10px;
             }
         }
         h5 {
-            display: flex;
-            color: olive;
-            margin: 0;
+            color: olivedrab;
+            margin: 0 5px;
             font-size: 22px;
             display: flex;
             align-items: center;
@@ -81,14 +81,15 @@
             span {
                 font-size: 12px;
                 color: gray;
+                font-style: italic;
                 margin-right: 10px;
             }
             a {
                 text-decoration: none;
-                color: olive;
+                color: olivedrab;
                 transition: all 0.3s;
                 &:hover {
-                    color:olivedrab;
+                    color: cadetblue
                 }
             }
         }
@@ -96,9 +97,10 @@
     .buttons {
         display: flex;
         align-items: center;
-        button, a, form {
+        button,
+        form,
+        a {
             margin: 5px 10px;
-            height: 38px;
             display: block;
         }
         form {
@@ -106,8 +108,12 @@
             align-items: center;
             margin: 0;
         }
+        button {
+            transform: rotate(1deg);
+        }
     }
 }
+
 .mechanic {
     display: flex;
     justify-content: flex-start;
@@ -115,10 +121,11 @@
     width: 100%;
     h5 {
         margin: 10px;
-        font-size: 50px;
-        color: darkgoldenrod;
+        font-size: 40px;
+        color: crimson;
     }
 }
+
 .truck-show {
     .line {
         display: flex;
@@ -131,19 +138,25 @@
         }
     }
     p {
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-family: 'Courier New', Courier, monospace;
         color: gray;
     }
 }
+
 .img {
     img {
-        width:auto;
+        width: auto;
         height: 300px;
     }
 }
+
 .img-small {
     img {
-        width:auto;
+        width: auto;
         height: 100px;
     }
+}
+
+textarea.form-control {
+    min-height: 200px;
 }
