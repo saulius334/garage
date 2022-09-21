@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Breakdown;
-use App\Http\Requests\StoreBreakdownRequest;
-use App\Http\Requests\UpdateBreakdownRequest;
+use App\Models\Mechanic;
+use Illuminate\Http\Request;
 
 class BreakdownController extends Controller
 {
@@ -15,7 +15,10 @@ class BreakdownController extends Controller
      */
     public function index()
     {
-        //
+        $mechanics = Mechanic::orderBy('name')->get();
+        return view('breakdown.index', [
+            'mechanics' => $mechanics
+        ]);
     }
 
     /**
@@ -34,7 +37,7 @@ class BreakdownController extends Controller
      * @param  \App\Http\Requests\StoreBreakdownRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBreakdownRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -68,7 +71,7 @@ class BreakdownController extends Controller
      * @param  \App\Models\Breakdown  $breakdown
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBreakdownRequest $request, Breakdown $breakdown)
+    public function update(Request $request, Breakdown $breakdown)
     {
         //
     }
