@@ -1,13 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Truck;
 use App\Models\Mechanic;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use Intervention\Image\Facades\Image;
-
+use Intervention\Image\Image;
 class TruckController extends Controller
 {
     /**
@@ -15,17 +11,39 @@ class TruckController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $trucks = Truck::all();
-        $mechanics = Mechanic::orderBy('surname')->get();
+        if ($request->mech) {
+            $id = (int) $request->mech;
+            if ($request->s) {
+                $trucks = Truck::where('mechanic_id', $id)->where(function($query) use ($request) {
+                    $query->where('maker', 'like', '%'.$request->s.'%')
+                    ->orWhere('make_year', 'like', '%'.$request->s.'%')
+                    ->orWhere('plate', 'like', '%'.$request->s.'%');
+                })->paginate(15)->withQueryString();
+            } else {
+                $trucks = Truck::where('mechanic_id', $id)->paginate(15)->withQueryString();
+            }
+        } else {
+            if ($request->s) {
+                $trucks = Truck::where('maker', 'like', '%'.$request->s.'%')
+                ->orWhere('make_year', 'like', '%'.$request->s.'%')
+                ->orWhere('plate', 'like', '%'.$request->s.'%')
+                ->paginate(15)->withQueryString();
+            } else {
+                $trucks = Truck::paginate(15)->withQueryString();
+            }
+        }
+
+        $mechanics = Mechanic::orderBy('surname')->paginate(15)->withQueryString();
 
         return view('truck.index', [
             'trucks' => $trucks,
-            'mechanics' => $mechanics
+            'mechanics' => $mechanics,
+            'mech' => $id ?? 0,
+            's' => $request->s ?? ''
         ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -33,51 +51,43 @@ class TruckController extends Controller
      */
     public function create()
     {
-        $mechanics = Mechanic::all();
-        // $mechanics = $mechanics->sortBy('name'); // rusiavimas lol easy
-        $mechanics = Mechanic::orderBy('name') // database rusiavimas where('id', 6)
-        ->orderBy('surname', 'desc')
-        ->get();
-
-
+        $mechanics = Mechanic::orderBy('name')->orderBy('surname', 'desc')->get();
+        // $mechanics = $mechanics->sortBy('surname');
         return view('truck.create', [
             'mechanics' => $mechanics
         ]);
     }
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreTruckRequest  $request
+     * @param  \Illuminate\Http\Request;  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
-        
         $truck = new Truck;
-
-
-        if ($request->file('photo')) {
-         $photo = $request->file('photo');
-         $ext = $photo->getClientOriginalExtension();
-         $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
-         $file = $name. '-' . rand(100000, 999999). '.' . $ext;
-         $Image = Image::make($photo)->pixelate(12);
-        //  $photo->move(public_path().'/trucks', $file);
-         $truck->photo = asset('/trucks') . '/' . $file;
-        }
-        
-        
-        $truck ->maker = $request->maker;
-        $truck ->plate = $request->plate;
-        $truck ->make_year = $request->make_year;
-        $truck ->mechanic_notices = $request->mechanic_notices;
-        $truck ->mechanic_id = $request->mechanic_id;
+            if ($request->file('photo')) {
+                $photo = $request->file('photo');
+                $ext = $photo->getClientOriginalExtension();
+                $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                $file = $name. '-' . rand(100000, 999999). '.' . $ext;
+                
+                $Image = Image::make($photo)->pixelate(12);
+                $Image->save(public_path().'/trucks/'.$file);
+                // $photo->move(public_path().'/trucks', $file);
+                $truck->photo = asset('/trucks') . '/' . $file;
+    
+            }
+    
+     
+        $truck->maker = $request->maker;
+        $truck->plate = $request->plate;
+        $truck->make_year = $request->make_year;
+        $truck->mechanic_notices = $request->mechanic_notices;
+        $truck->mechanic_id = $request->mechanic_id;
         $truck->save();
         return redirect()->route('t_index');
     }
-
     /**
      * Display the specified resource.
      *
@@ -90,7 +100,6 @@ class TruckController extends Controller
             'truck' => $truck
         ]);
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -105,26 +114,24 @@ class TruckController extends Controller
             'truck' => $truck
         ]);
     }
-
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateTruckRequest  $request
+     * @param  \Illuminate\Http\Request;  $request
      * @param  \App\Models\Truck  $truck
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Truck $truck)
     {
-        $truck ->maker = $request->maker;
-        $truck ->plate = $request->plate;
-        $truck ->make_year = $request->make_year;
-        $truck ->mechanic_notices = $request->mechanic_notices;
-        $truck ->mechanic_id = $request->mechanic_id;
+        $truck->maker = $request->maker;
+        $truck->plate = $request->plate;
+        $truck->make_year = $request->make_year;
+        $truck->mechanic_notices = $request->mechanic_notices;
+        $truck->mechanic_id = $request->mechanic_id;
         if ($request->delete_photo) {
             unlink(public_path().'/trucks/' .pathinfo($truck->photo, PATHINFO_FILENAME).'.'.pathinfo($truck->photo, PATHINFO_EXTENSION));
             $truck->photo = null;
         }
-
         if ($request->file('photo')) {
             if ($truck->photo) {
                 unlink(public_path().'/trucks/' .pathinfo($truck->photo, PATHINFO_FILENAME).'.'.pathinfo($truck->photo, PATHINFO_EXTENSION));
@@ -139,7 +146,6 @@ class TruckController extends Controller
         $truck->save();
         return redirect()->route('t_index');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -149,8 +155,7 @@ class TruckController extends Controller
     public function destroy(Truck $truck)
     {
         if ($truck->photo) {
-            unlink(public_path() . '/trucks/' . pathinfo($truck->photo, PATHINFO_FILENAME) . '.' . pathinfo($truck->photo, PATHINFO_EXTENSION));
-
+            unlink(public_path().'/trucks/' .pathinfo($truck->photo, PATHINFO_FILENAME).'.'.pathinfo($truck->photo, PATHINFO_EXTENSION));
         }
         $truck->delete();
         return redirect()->route('t_index');
