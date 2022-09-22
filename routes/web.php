@@ -47,9 +47,9 @@ Route::prefix('truck')->name('t_')->group(function () {
 
 Route::prefix('breakdown')->name('b_')->group(function () {
     Route::get('/', [BreakCon::class, 'index'])->name('index');
-    // Route::get('/create', [truckCon::class, 'create'])->name('create');
-    // Route::post('/create', [truckCon::class, 'store'])->name('store');
-    // Route::get('/show/{truck}', [truckCon::class, 'show'])->name('show');
+    Route::get('/trucksList/{mechanic_id}', [BreakCon::class, 'trucksList']);
+    Route::post('/create', [BreakCon::class, 'store']);
+    Route::get('/list', [BreakCon::class, 'list']);
     // Route::delete('/delete/{truck}', [truckCon::class, 'destroy'])->name('delete');
     // Route::get('/edit/{truck}', [truckCon::class, 'edit'])->name('edit');
     // Route::put('/edit/{truck}', [truckCon::class, 'update'])->name('update');
