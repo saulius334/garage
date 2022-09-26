@@ -12,7 +12,11 @@
                             <div class="trucks-list">
                                 <div class="content">
                                     <h2><span></span>{{$breakdown->title}}</h2>
-                                    <h4><span>status: </span>{{$breakdown->status}}</h4>
+                                    <h4><span>status: </span>{{$status[$breakdown->status]}}</h4>
+                                </div>
+                                <div class="buttons">
+                                    <button data-id="{{$breakdown->id}}" type="button" class="btn btn-danger delete--button">Delete</button>
+
                                 </div>
                             </div>
                         </li>

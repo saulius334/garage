@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Intervention\Image\Image;
 class TruckController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,20 +19,20 @@ class TruckController extends Controller
     {
         if ($request->mech) {
             $id = (int) $request->mech;
-            if ($request->s) {
+            if ($request->search) {
                 $trucks = Truck::where('mechanic_id', $id)->where(function($query) use ($request) {
-                    $query->where('maker', 'like', '%'.$request->s.'%')
-                    ->orWhere('make_year', 'like', '%'.$request->s.'%')
-                    ->orWhere('plate', 'like', '%'.$request->s.'%');
+                    $query->where('maker', 'like', '%'.$request->search.'%')
+                    ->orWhere('make_year', 'like', '%'.$request->search.'%')
+                    ->orWhere('plate', 'like', '%'.$request->search.'%');
                 })->paginate(15)->withQueryString();
             } else {
                 $trucks = Truck::where('mechanic_id', $id)->paginate(15)->withQueryString();
             }
         } else {
-            if ($request->s) {
-                $trucks = Truck::where('maker', 'like', '%'.$request->s.'%')
-                ->orWhere('make_year', 'like', '%'.$request->s.'%')
-                ->orWhere('plate', 'like', '%'.$request->s.'%')
+            if ($request->search) {
+                $trucks = Truck::where('maker', 'like', '%'.$request->search.'%')
+                ->orWhere('make_year', 'like', '%'.$request->search.'%')
+                ->orWhere('plate', 'like', '%'.$request->search.'%')
                 ->paginate(15)->withQueryString();
             } else {
                 $trucks = Truck::paginate(15)->withQueryString();
@@ -41,7 +45,7 @@ class TruckController extends Controller
             'trucks' => $trucks,
             'mechanics' => $mechanics,
             'mech' => $id ?? 0,
-            's' => $request->s ?? ''
+            'search' => $request->s ?? ''
         ]);
     }
     /**
