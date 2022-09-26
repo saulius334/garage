@@ -10,4 +10,5 @@
         </div>
     </div>
 </div>
+@include('breakdown.modal')
 @endsection

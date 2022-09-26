@@ -50,7 +50,7 @@ Route::prefix('breakdown')->name('b_')->group(function () {
     Route::get('/trucksList/{mechanic_id}', [BreakCon::class, 'trucksList']);
     Route::post('/create', [BreakCon::class, 'store']);
     Route::get('/list', [BreakCon::class, 'list']);
-    // Route::delete('/delete/{truck}', [BreakCon::class, 'destroy'])->name('delete');
-    // Route::get('/edit/{truck}', [BreakCon::class, 'edit'])->name('edit');
+    Route::delete('/{breakdown}', [BreakCon::class, 'destroy']);
+    Route::get('/modal/{breakdown}', [BreakCon::class, 'modal']);
     // Route::put('/edit/{truck}', [BreakCon::class, 'update'])->name('update');
 });
