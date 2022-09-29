@@ -94,7 +94,19 @@ class BreakdownController extends Controller
      */
     public function update(Request $request, Breakdown $breakdown)
     {
-        //
+        $breakdown->truck_id = (int) $request->truck_id;
+        $breakdown->title = $request->title;
+        $breakdown->notes = $request->notes;
+        $breakdown->status = (int) $request->status;
+        $breakdown->price = (float) $request->price;
+        $breakdown->discount = (float) $request->discount;
+
+        $breakdown->save();
+
+        return response()->json([
+            'msg' => 'All good',
+            'status' => 'OK'
+        ]);
     }
 
     /**

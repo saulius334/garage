@@ -35,7 +35,6 @@ if (breakdown) {
         })
         axios.post(breakdownUrl + '/create', data)
         .then(res => {
-            console.log(res.data);
             getList();
         })
         .catch(error => {
@@ -54,6 +53,7 @@ const getList = () => {
         breakdownsList.innerHTML = res.data.html;
         deleteEvent();
         modalEvent();
+
     })
 }
 const deleteEvent = () => {
@@ -69,18 +69,47 @@ const deleteEvent = () => {
         })
     })
 }
+
+
+const modal = document.querySelector('#edit-modal');
+let fadeModal;
+if (modal) {
+    fadeModal = new Modal(modal);
+}
+
+
 const modalEvent = () => {
-    const modal = document.querySelector('#edit-modal');
-    const fadeModal = new Modal(modal);
     document.querySelectorAll('.edit--button')
         .forEach(b => {
             b.addEventListener('click', () => {
                 fadeModal.show();
                 axios.get(breakdownUrl + '/modal/' + b.dataset.id)
                 .then(res => {
-                    modal.querySelector('.modal-dialog').innerHTML = res.data.html
+                    modal.querySelector('.modal-dialog').innerHTML = res.data.html;
+                    console.log(modal.querySelector('.modal-dialog'));
+                    editEvent(b.dataset.id);
                 })
             })
         })
+}
 
+const editEvent = id => {
+    document.querySelector('[data-edit-submit]')
+        .addEventListener('click', () => {
+            const data = {};
+            document.querySelectorAll('[data-edit]')
+                .forEach(i => {
+                    data[i.getAttribute('name')] = i.value;
+                });
+            axios.put(breakdownUrl + '/edit/' + id, data)
+                .then(res => {
+                    getList();
+                    fadeModal.hide();
+                })
+                .catch(error => {
+                    console.log('viskas blogai');
+                    fadeModal.hide();
+                })
+
+        });
 }
